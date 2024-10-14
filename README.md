@@ -7,6 +7,7 @@ Created for easy deployment of -arr services. Inspired by [Ezarr](https://github
 - [Prowlarr](https://prowlarr.com/) is an indexer manager/proxy built on the popular *arr .net/reactjs base stack to integrate with your various PVR apps. Prowlarr supports management of both Torrent Trackers and Usenet Indexers. It integrates seamlessly with Lidarr, Mylar3, Radarr, Readarr, and Sonarr offering complete management of your indexers with no per app Indexer setup required.
 - [FlareSolverr](https://github.com/FlareSolverr/FlareSolverr) is a proxy server to bypass Cloudflare and DDoS-GUARD protection.
 - [qBittorrent](https://www.qbittorrent.org/) is a bittorrent client programmed in C++ / Qt that uses libtorrent (sometimes called libtorrent-rasterbar) by Arvid Norberg.
+- [Decluttarr](https://github.com/ManiMatter/decluttarr) keeps the radarr & sonarr & lidarr & readarr & whisparr queue free of stalled / redundant downloads.
 - [Bazarr](https://www.bazarr.media/) is a companion application to Sonarr and Radarr. It manages and downloads subtitles based on your requirements. You define your preferences by TV show or movie and Bazarr takes care of everything for you.
 
 ## Requirements
@@ -17,3 +18,5 @@ Created for easy deployment of -arr services. Inspired by [Ezarr](https://github
 1. Set the environment variables to your liking (.env file).
 2. Run `setup.sh`.
 3. Run `docker compose up -d`.
+
+(Optional) Use [Profilarr](https://github.com/Dictionarry-Hub/profilarr) to import custom formats / profiles.
