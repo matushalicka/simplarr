@@ -18,5 +18,4 @@ Created for easy deployment of -arr services. Inspired by [Ezarr](https://github
 1. Set the environment variables to your liking (.env file).
 2. Run `setup.sh`.
 3. Run `docker compose up -d`.
-
-(Optional) Use [Profilarr](https://github.com/Dictionarry-Hub/profilarr) to import custom formats / profiles.
+4. (Optional) Use [Profilarr](https://github.com/Dictionarry-Hub/profilarr) to import custom formats / profiles.
