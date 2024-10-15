@@ -114,7 +114,6 @@ services:
 
       # Feature Settings
       - PERMITTED_ATTEMPTS=7
-      - NO_STALLED_REMOVAL_QBIT_TAG=lock
       - IGNORE_PRIVATE_TRACKERS=False
 
       ## Radarr
