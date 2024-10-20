@@ -109,11 +109,12 @@ services:
       - PGID=${GROUP_ID}
 
       ## Features 
-      - REMOVE_TIMER=1440
+      - REMOVE_TIMER=60
+      - REMOVE_METADATA_MISSING=True
       - REMOVE_STALLED=True
 
       # Feature Settings
-      - PERMITTED_ATTEMPTS=7
+      - PERMITTED_ATTEMPTS=24
       - IGNORE_PRIVATE_TRACKERS=False
 
       ## Radarr
