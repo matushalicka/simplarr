@@ -87,14 +87,14 @@ services:
       - PGID=${GROUP_ID}
       - UMASK=002
       - TZ=${TIMEZONE}
-      - WEBUI_PORT=8080
+      - WEBUI_PORT=8081
       - TORRENTING_PORT=${QBITTORRENT_INCOMING_CONNECTIONS_PORT}
     volumes:
       - ./configs/linuxserver/qbittorrent:/config
       - ${MOVIES_DIRECTORY}/data/movies:/data/movies
       - ${TV_SHOWS_DIRECTORY}/data/tvshows:/data/tvshows
     ports:
-      - 8080:8080
+      - 8081:8081
       - ${QBITTORRENT_INCOMING_CONNECTIONS_PORT}:${QBITTORRENT_INCOMING_CONNECTIONS_PORT}
       - ${QBITTORRENT_INCOMING_CONNECTIONS_PORT}:${QBITTORRENT_INCOMING_CONNECTIONS_PORT}/udp
     restart: unless-stopped
@@ -126,7 +126,7 @@ services:
       - SONARR_KEY=${SONARR_API_KEY}
 
       ## qBitorrent
-      - QBITTORRENT_URL=http://qbittorrent:8080
+      - QBITTORRENT_URL=http://qbittorrent:8081
       - QBITTORRENT_USERNAME=${QBITTORRENT_USERNAME}
       - QBITTORRENT_PASSWORD=${QBITTORRENT_PASSWORD}
 
