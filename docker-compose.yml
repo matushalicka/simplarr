@@ -79,8 +79,24 @@ services:
       - "${PORT:-8191}:8191"
     restart: unless-stopped
 
+  sabnzbd:
+    image: lscr.io/linuxserver/sabnzbd:latest
+    container_name: sabnzbd
+    environment:
+      - PUID=${USER_ID}
+      - PGID=${GROUP_ID}
+      - UMASK=002
+      - TZ=${TIMEZONE}
+    volumes:
+      - ./configs/linuxserver/sabnzbd:/config
+      - ${MOVIES_DIRECTORY}/data/movies:/data/movies
+      - ${TV_SHOWS_DIRECTORY}/data/tvshows:/data/tvshows
+    ports:
+      - 8080:8080
+    restart: unless-stopped
+
   qbittorrent:
-    image: lscr.io/linuxserver/qbittorrent:latest
+    image: lscr.io/linuxserver/qbittorrent:4.6.7
     container_name: qbittorrent
     environment:
       - PUID=${USER_ID}
@@ -109,12 +125,12 @@ services:
       - PGID=${GROUP_ID}
 
       ## Features 
-      - REMOVE_TIMER=60
+      - REMOVE_TIMER=1440
       - REMOVE_METADATA_MISSING=True
       - REMOVE_STALLED=True
 
       # Feature Settings
-      - PERMITTED_ATTEMPTS=24
+      - PERMITTED_ATTEMPTS=7
       - IGNORE_PRIVATE_TRACKERS=False
 
       ## Radarr
