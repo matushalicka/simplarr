@@ -10,6 +10,8 @@ Created for easy deployment of -arr services. Inspired by [Ezarr](https://github
 - [qBittorrent](https://www.qbittorrent.org/) is a bittorrent client programmed in C++ / Qt that uses libtorrent (sometimes called libtorrent-rasterbar) by Arvid Norberg.
 - [Decluttarr](https://github.com/ManiMatter/decluttarr) keeps the radarr & sonarr & lidarr & readarr & whisparr queue free of stalled / redundant downloads.
 - [Bazarr](https://www.bazarr.media/) is a companion application to Sonarr and Radarr. It manages and downloads subtitles based on your requirements. You define your preferences by TV show or movie and Bazarr takes care of everything for you.
+- [Recyclarr](https://recyclarr.dev/) is a command-line application that will automatically synchronize recommended settings from the TRaSH guides to your Sonarr/Radarr instances.
+
 
 ## Requirements
 - [Bash](http://www.gnu.org/software/bash/)
@@ -19,4 +21,3 @@ Created for easy deployment of -arr services. Inspired by [Ezarr](https://github
 1. Set the environment variables to your liking (.env file).
 2. Run `setup.sh`.
 3. Run `docker compose up -d`.
-4. (Optional) Use [Profilarr](https://github.com/Dictionarry-Hub/profilarr) to import custom formats / profiles.
