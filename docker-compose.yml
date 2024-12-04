@@ -92,7 +92,7 @@ services:
       - ${MOVIES_DIRECTORY}/data/movies:/data/movies
       - ${TV_SHOWS_DIRECTORY}/data/tvshows:/data/tvshows
     ports:
-      - 8080:8080
+      - 8081:8081 # Use 8080 for setup, then change to 8081
     restart: unless-stopped
 
   qbittorrent:
@@ -103,14 +103,14 @@ services:
       - PGID=${GROUP_ID}
       - UMASK=002
       - TZ=${TIMEZONE}
-      - WEBUI_PORT=8081
+      - WEBUI_PORT=8082
       - TORRENTING_PORT=${QBITTORRENT_INCOMING_CONNECTIONS_PORT}
     volumes:
       - ./configs/linuxserver/qbittorrent:/config
       - ${MOVIES_DIRECTORY}/data/movies:/data/movies
       - ${TV_SHOWS_DIRECTORY}/data/tvshows:/data/tvshows
     ports:
-      - 8081:8081
+      - 8082:8082
       - ${QBITTORRENT_INCOMING_CONNECTIONS_PORT}:${QBITTORRENT_INCOMING_CONNECTIONS_PORT}
       - ${QBITTORRENT_INCOMING_CONNECTIONS_PORT}:${QBITTORRENT_INCOMING_CONNECTIONS_PORT}/udp
     restart: unless-stopped
