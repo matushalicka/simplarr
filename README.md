@@ -20,4 +20,5 @@ Created for easy deployment of -arr services. Inspired by [Ezarr](https://github
 ## Using
 1. Set the environment variables to your liking (.env file).
 2. Run `setup.sh`.
-3. Run `docker compose up -d`.
+3. Run `sudo docker network create default_network`.
+4. Run `docker compose up -d`.

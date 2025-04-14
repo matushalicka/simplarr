@@ -13,6 +13,9 @@ services:
       - ./configs/linuxserver/jellyfin:/config
       - ${TV_SHOWS_DIRECTORY}/data/tvshows:/data/tvshows
       - ${MOVIES_DIRECTORY}/data/movies:/data/movies
+      - ${OTHERS_DIRECTORY}/data/others:/data/others
+    networks:
+      - default_network
     ports:
       - 8096:8096
       - 8920:8920
@@ -34,6 +37,8 @@ services:
     volumes:
       - ./configs/linuxserver/radarr:/config
       - ${MOVIES_DIRECTORY}/data/movies:/data/movies
+    networks:
+      - default_network
     ports:
       - 7878:7878
     restart: always
@@ -49,6 +54,8 @@ services:
     volumes:
       - ./configs/linuxserver/sonarr:/config
       - ${TV_SHOWS_DIRECTORY}/data/tvshows:/data/tvshows
+    networks:
+      - default_network
     ports:
       - 8989:8989
     restart: always
@@ -63,6 +70,8 @@ services:
       - TZ=${TIMEZONE}
     volumes:
       - ./configs/linuxserver/prowlarr:/config
+    networks:
+      - default_network
     ports:
       - 9696:9696
     restart: always
@@ -75,6 +84,8 @@ services:
       - LOG_HTML=${LOG_HTML:-false}
       - CAPTCHA_SOLVER=${CAPTCHA_SOLVER:-none}
       - TZ=${TIMEZONE}
+    networks:
+      - default_network
     ports:
       - "${PORT:-8191}:8191"
     restart: always
@@ -91,6 +102,9 @@ services:
       - ./configs/linuxserver/sabnzbd:/config
       - ${MOVIES_DIRECTORY}/data/movies:/data/movies
       - ${TV_SHOWS_DIRECTORY}/data/tvshows:/data/tvshows
+      - ${OTHERS_DIRECTORY}/data/others:/data/others
+    networks:
+      - default_network
     ports:
       - ${SABNZBD_PORT}:${SABNZBD_PORT}
     restart: always
@@ -109,6 +123,9 @@ services:
       - ./configs/linuxserver/qbittorrent:/config
       - ${MOVIES_DIRECTORY}/data/movies:/data/movies
       - ${TV_SHOWS_DIRECTORY}/data/tvshows:/data/tvshows
+      - ${OTHERS_DIRECTORY}/data/others:/data/others
+    networks:
+      - default_network
     ports:
       - 8082:8082
       - ${QBITTORRENT_INCOMING_CONNECTIONS_PORT}:${QBITTORRENT_INCOMING_CONNECTIONS_PORT}
@@ -118,6 +135,8 @@ services:
   decluttarr:
     image: ghcr.io/manimatter/decluttarr:latest
     container_name: decluttarr
+    networks:
+      - default_network
     restart: always
     environment:
       - TZ=${TIMEZONE}
@@ -158,6 +177,8 @@ services:
       - ./configs/linuxserver/bazarr:/config
       - ${MOVIES_DIRECTORY}/data/movies:/data/movies
       - ${TV_SHOWS_DIRECTORY}/data/tvshows:/data/tvshows
+    networks:
+      - default_network
     ports:
       - 6767:6767
     restart: always
@@ -170,4 +191,11 @@ services:
       - ./configs/recyclarr:/config
     environment:
       - TZ=${TIMEZONE}
+    networks:
+      - default_network
     restart: always
+
+networks:
+  default_network:
+    name: default_network
+    external: true
