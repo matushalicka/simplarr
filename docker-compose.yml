@@ -132,39 +132,6 @@ services:
       - ${QBITTORRENT_INCOMING_CONNECTIONS_PORT}:${QBITTORRENT_INCOMING_CONNECTIONS_PORT}/udp
     restart: always
 
-  decluttarr:
-    image: ghcr.io/manimatter/decluttarr:latest
-    container_name: decluttarr
-    networks:
-      - default_network
-    restart: always
-    environment:
-      - TZ=${TIMEZONE}
-      - PUID=${USER_ID}
-      - PGID=${GROUP_ID}
-
-      ## Features 
-      - REMOVE_TIMER=1440
-      - REMOVE_METADATA_MISSING=True
-      - REMOVE_STALLED=True
-
-      # Feature Settings
-      - PERMITTED_ATTEMPTS=7
-      - IGNORE_PRIVATE_TRACKERS=False
-
-      ## Radarr
-      - RADARR_URL=http://radarr:7878
-      - RADARR_KEY=${RADARR_API_KEY}
-
-      ## Sonarr
-      - SONARR_URL=http://sonarr:8989
-      - SONARR_KEY=${SONARR_API_KEY}
-
-      ## qBitorrent
-      - QBITTORRENT_URL=http://qbittorrent:8081
-      - QBITTORRENT_USERNAME=${QBITTORRENT_USERNAME}
-      - QBITTORRENT_PASSWORD=${QBITTORRENT_PASSWORD}
-
   bazarr:
     image: lscr.io/linuxserver/bazarr:latest
     container_name: bazarr
