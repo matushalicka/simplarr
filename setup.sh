@@ -7,7 +7,7 @@ sudo mkdir -pv ./configs/linuxserver/{jellyfin,radarr,sonarr,prowlarr,sabnzbd,qb
 sudo mkdir -pv ./configs/recyclarr
 sudo mkdir -pv ${MOVIES_DIRECTORY}/data/movies/{media,nzbs,torrents}
 sudo mkdir -pv ${TV_SHOWS_DIRECTORY}/data/tvshows/{media,nzbs,torrents}
-sudo mkdir -pv ${OTHERS_DIRECTORY}/data/others/{media,nzbs,torrents}
+sudo mkdir -pv ${OTHERS_DIRECTORY}/data/others/{nzbs,torrents}
 
 # Set permissions
 sudo chmod 775 ./configs
