@@ -76,18 +76,19 @@ services:
       - 9696:9696
     restart: always
 
-  flaresolverr:
-    image: ghcr.io/flaresolverr/flaresolverr:latest
-    container_name: flaresolverr
-    environment:
-      - LOG_LEVEL=${LOG_LEVEL:-info}
-      - LOG_HTML=${LOG_HTML:-false}
-      - CAPTCHA_SOLVER=${CAPTCHA_SOLVER:-none}
-      - TZ=${TIMEZONE}
+  byparr:
+    image: ghcr.io/thephaseless/byparr:latest
+    container_name: byparr
+    shm_size: 2gb
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./configs/byparr/screenshots:/app/screenshots
     networks:
       - default_network
     ports:
-      - ${PORT:-8191}:8191
+      - 8191:8191
     restart: always
 
   sabnzbd:
@@ -161,6 +162,20 @@ services:
     networks:
       - default_network
     restart: always
+
+  decluttarr:
+    image: ghcr.io/manimatter/decluttarr:dev
+    container_name: decluttarr
+    restart: always
+    environment:
+      - TZ=${TIMEZONE}
+      - PUID=${USER_ID}
+      - PGID=${GROUP_ID}
+    volumes:
+      - ./configs/decluttarr/config:/app/config
+      - ./configs/decluttarr/logs:/app/logs
+    networks:
+      - default_network
 
 networks:
   default_network:
