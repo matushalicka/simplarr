@@ -5,7 +5,6 @@ source .env
 # Make directories
 sudo mkdir -pv ./configs/linuxserver/{jellyfin,radarr,sonarr,prowlarr,sabnzbd,qbittorrent,bazarr}
 sudo mkdir -pv ./configs/recyclarr
-sudo mkdir -pv ./configs/decluttarr/{config,logs}
 sudo mkdir -pv ./configs/byparr/screenshots
 sudo mkdir -pv ${MOVIES_DIRECTORY}/data/movies/{media,nzbs,torrents}
 sudo mkdir -pv ${TV_SHOWS_DIRECTORY}/data/tvshows/{media,nzbs,torrents}
@@ -20,10 +19,6 @@ sudo chmod 775 ./configs/linuxserver/{jellyfin,radarr,sonarr,prowlarr,sabnzbd,qb
 sudo chown ${USER_ID}:${GROUP_ID} ./configs/linuxserver/{jellyfin,radarr,sonarr,prowlarr,sabnzbd,qbittorrent,bazarr}
 sudo chmod 775 ./configs/recyclarr
 sudo chown ${USER_ID}:${GROUP_ID} ./configs/recyclarr
-sudo chmod 775 ./configs/decluttarr
-sudo chown ${USER_ID}:${GROUP_ID} ./configs/decluttarr
-sudo chmod 775 ./configs/decluttarr/{config,logs}
-sudo chown ${USER_ID}:${GROUP_ID} ./configs/decluttarr/{config,logs}
 sudo chmod 775 ./configs/byparr
 sudo chown ${USER_ID}:${GROUP_ID} ./configs/byparr
 sudo chmod 775 ./configs/byparr/screenshots

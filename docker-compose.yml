@@ -163,20 +163,6 @@ services:
       - default_network
     restart: always
 
-  decluttarr:
-    image: ghcr.io/manimatter/decluttarr:dev
-    container_name: decluttarr
-    restart: always
-    environment:
-      - TZ=${TIMEZONE}
-      - PUID=${USER_ID}
-      - PGID=${GROUP_ID}
-    volumes:
-      - ./configs/decluttarr/config:/app/config
-      - ./configs/decluttarr/logs:/app/logs
-    networks:
-      - default_network
-
 networks:
   default_network:
     name: default_network
