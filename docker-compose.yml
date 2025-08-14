@@ -3,17 +3,15 @@ services:
     image: lscr.io/linuxserver/jellyfin:latest
     container_name: jellyfin
     environment:
-      - PUID=${USER_ID}
-      - PGID=${GROUP_ID}
+      - PUID=$USER_ID
+      - PGID=$GROUP_ID
       - UMASK=002
-      - TZ=${TIMEZONE}
-      - JELLYFIN_PublishedServerUrl=${JELLYFIN_URL}
+      - TZ=$TIMEZONE
+      - JELLYFIN_PublishedServerUrl=$JELLYFIN_URL
       - DOCKER_MODS=linuxserver/mods:jellyfin-amd
     volumes:
-      - ./configs/linuxserver/jellyfin:/config
-      - ${TV_SHOWS_DIRECTORY}/data/tvshows:/data/tvshows
-      - ${MOVIES_DIRECTORY}/data/movies:/data/movies
-      - ${OTHERS_DIRECTORY}/data/others:/data/others
+      - ./configs/jellyfin:/config
+      - $DATA_DIRECTORY/media:/data/media
     networks:
       - default_network
     ports:
@@ -30,13 +28,13 @@ services:
     image: lscr.io/linuxserver/radarr:latest
     container_name: radarr
     environment:
-      - PUID=${USER_ID}
-      - PGID=${GROUP_ID}
+      - PUID=$USER_ID
+      - PGID=$GROUP_ID
       - UMASK=002
-      - TZ=${TIMEZONE}
+      - TZ=$TIMEZONE
     volumes:
-      - ./configs/linuxserver/radarr:/config
-      - ${MOVIES_DIRECTORY}/data/movies:/data/movies
+      - ./configs/radarr:/config
+      - $DATA_DIRECTORY:/data
     networks:
       - default_network
     ports:
@@ -47,13 +45,13 @@ services:
     image: lscr.io/linuxserver/sonarr:latest
     container_name: sonarr
     environment:
-      - PUID=${USER_ID}
-      - PGID=${GROUP_ID}
+      - PUID=$USER_ID
+      - PGID=$GROUP_ID
       - UMASK=002
-      - TZ=${TIMEZONE}
+      - TZ=$TIMEZONE
     volumes:
-      - ./configs/linuxserver/sonarr:/config
-      - ${TV_SHOWS_DIRECTORY}/data/tvshows:/data/tvshows
+      - ./configs/sonarr:/config
+      - $DATA_DIRECTORY:/data
     networks:
       - default_network
     ports:
@@ -64,27 +62,23 @@ services:
     image: lscr.io/linuxserver/prowlarr:latest
     container_name: prowlarr
     environment:
-      - PUID=${USER_ID}
-      - PGID=${GROUP_ID}
+      - PUID=$USER_ID
+      - PGID=$GROUP_ID
       - UMASK=002
-      - TZ=${TIMEZONE}
+      - TZ=$TIMEZONE
     volumes:
-      - ./configs/linuxserver/prowlarr:/config
+      - ./configs/prowlarr:/config
     networks:
       - default_network
     ports:
       - 9696:9696
     restart: always
 
-  byparr:
-    image: ghcr.io/thephaseless/byparr:latest
-    container_name: byparr
-    shm_size: 2gb
-    build:
-      context: .
-      dockerfile: Dockerfile
-    volumes:
-      - ./configs/byparr/screenshots:/app/screenshots
+  flaresolverr:
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    container_name: flaresolverr
+    environment:
+      - TZ=$TIMEZONE
     networks:
       - default_network
     ports:
@@ -95,56 +89,51 @@ services:
     image: lscr.io/linuxserver/sabnzbd:latest
     container_name: sabnzbd
     environment:
-      - PUID=${USER_ID}
-      - PGID=${GROUP_ID}
+      - PUID=$USER_ID
+      - PGID=$GROUP_ID
       - UMASK=002
-      - TZ=${TIMEZONE}
+      - TZ=$TIMEZONE
     volumes:
-      - ./configs/linuxserver/sabnzbd:/config
-      - ${MOVIES_DIRECTORY}/data/movies:/data/movies
-      - ${TV_SHOWS_DIRECTORY}/data/tvshows:/data/tvshows
-      - ${OTHERS_DIRECTORY}/data/others:/data/others
+      - ./configs/sabnzbd:/config
+      - $DATA_DIRECTORY/usenet:/data/usenet
     networks:
       - default_network
     ports:
-      - ${SABNZBD_PORT}:${SABNZBD_PORT}
+      - $SABNZBD_PORT:$SABNZBD_PORT
     restart: always
 
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent:latest
     container_name: qbittorrent
     environment:
-      - PUID=${USER_ID}
-      - PGID=${GROUP_ID}
+      - PUID=$USER_ID
+      - PGID=$GROUP_ID
       - UMASK=002
-      - TZ=${TIMEZONE}
+      - TZ=$TIMEZONE
       - WEBUI_PORT=8082
-      - TORRENTING_PORT=${QBITTORRENT_INCOMING_CONNECTIONS_PORT}
+      - TORRENTING_PORT=$QBITTORRENT_INCOMING_CONNECTIONS_PORT
     volumes:
-      - ./configs/linuxserver/qbittorrent:/config
-      - ${MOVIES_DIRECTORY}/data/movies:/data/movies
-      - ${TV_SHOWS_DIRECTORY}/data/tvshows:/data/tvshows
-      - ${OTHERS_DIRECTORY}/data/others:/data/others
+      - ./configs/qbittorrent:/config
+      - $DATA_DIRECTORY/torrents:/data/torrents
     networks:
       - default_network
     ports:
       - 8082:8082
-      - ${QBITTORRENT_INCOMING_CONNECTIONS_PORT}:${QBITTORRENT_INCOMING_CONNECTIONS_PORT}
-      - ${QBITTORRENT_INCOMING_CONNECTIONS_PORT}:${QBITTORRENT_INCOMING_CONNECTIONS_PORT}/udp
+      - $QBITTORRENT_INCOMING_CONNECTIONS_PORT:$QBITTORRENT_INCOMING_CONNECTIONS_PORT
+      - $QBITTORRENT_INCOMING_CONNECTIONS_PORT:$QBITTORRENT_INCOMING_CONNECTIONS_PORT/udp
     restart: always
 
   bazarr:
     image: lscr.io/linuxserver/bazarr:latest
     container_name: bazarr
     environment:
-      - PUID=${USER_ID}
-      - PGID=${GROUP_ID}
+      - PUID=$USER_ID
+      - PGID=$GROUP_ID
       - UMASK=002
-      - TZ=${TIMEZONE}
+      - TZ=$TIMEZONE
     volumes:
-      - ./configs/linuxserver/bazarr:/config
-      - ${MOVIES_DIRECTORY}/data/movies:/data/movies
-      - ${TV_SHOWS_DIRECTORY}/data/tvshows:/data/tvshows
+      - ./configs/bazarr:/config
+      - $DATA_DIRECTORY/media:/data/media
     networks:
       - default_network
     ports:
@@ -154,11 +143,11 @@ services:
   recyclarr:
     image: ghcr.io/recyclarr/recyclarr:latest
     container_name: recyclarr
-    user: ${USER_ID}:${GROUP_ID}
+    user: $USER_ID:$GROUP_ID
     volumes:
       - ./configs/recyclarr:/config
     environment:
-      - TZ=${TIMEZONE}
+      - TZ=$TIMEZONE
     networks:
       - default_network
     restart: always
