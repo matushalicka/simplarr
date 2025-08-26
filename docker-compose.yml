@@ -16,7 +16,6 @@ services:
       - default_network
     ports:
       - 8096:8096
-      - 8920:8920
       - 7359:7359/udp
       - 1900:1900/udp
     devices:
@@ -35,6 +34,7 @@ services:
     volumes:
       - ./configs/radarr:/config
       - $DATA_DIRECTORY:/data
+      - ./data2:/data2
     networks:
       - default_network
     ports:
@@ -52,6 +52,7 @@ services:
     volumes:
       - ./configs/sonarr:/config
       - $DATA_DIRECTORY:/data
+      - ./data2:/data2
     networks:
       - default_network
     ports:
@@ -96,6 +97,7 @@ services:
     volumes:
       - ./configs/sabnzbd:/config
       - $DATA_DIRECTORY/usenet:/data/usenet
+      - ./data2/usenet:/data2/usenet
     networks:
       - default_network
     ports:
@@ -115,6 +117,7 @@ services:
     volumes:
       - ./configs/qbittorrent:/config
       - $DATA_DIRECTORY/torrents:/data/torrents
+      - ./data2/torrents:/data2/torrents
     networks:
       - default_network
     ports:
