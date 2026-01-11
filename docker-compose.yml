@@ -16,6 +16,7 @@ services:
       - default_network
     ports:
       - 8096:8096
+      - 8920:8920
       - 7359:7359/udp
       - 1900:1900/udp
     devices:
@@ -80,6 +81,8 @@ services:
     container_name: flaresolverr
     environment:
       - TZ=$TIMEZONE
+    volumes:
+      - flaresolverr:/config
     networks:
       - default_network
     ports:
@@ -159,3 +162,6 @@ networks:
   default_network:
     name: default_network
     external: true
+
+volumes:
+  flaresolverr:
