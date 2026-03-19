@@ -9,8 +9,8 @@ Created for easy deployment of -arr services. Inspired by [Ezarr](https://github
 - [SABnzbd](https://sabnzbd.org/) is an Open Source Binary Newsreader written in Python.
 - [qBittorrent](https://www.qbittorrent.org/) is a bittorrent client programmed in C++ / Qt that uses libtorrent (sometimes called libtorrent-rasterbar) by Arvid Norberg.
 - [Bazarr](https://www.bazarr.media/) is a companion application to Sonarr and Radarr. It manages and downloads subtitles based on your requirements. You define your preferences by TV show or movie and Bazarr takes care of everything for you.
-- [Recyclarr](https://recyclarr.dev/) is a command-line application that will automatically synchronize recommended settings from the TRaSH guides to your Sonarr/Radarr instances.
-
+- [Profilarr](https://github.com/Dictionarry-Hub/Profilarr) is a command-line application that will automatically synchronize recommended settings to your Sonarr/Radarr instances.
+- [Decluttarr](https://github.com/ManiMatter/decluttarr) is a helper tool that works with the *arr-application suite, and automates the clean-up for their download queues, keeping them free of stalled / redundant downloads.
 
 ## Requirements
 - [Bash](http://www.gnu.org/software/bash/)

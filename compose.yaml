@@ -146,12 +146,28 @@ services:
       - 6767:6767
     restart: always
 
-  recyclarr:
-    image: ghcr.io/recyclarr/recyclarr:latest
-    container_name: recyclarr
-    user: $USER_ID:$GROUP_ID
+  decluttarr:
+    image: ghcr.io/manimatter/decluttarr:latest
+    container_name: decluttarr
+    restart: always
+    environment:
+      - TZ=$TIMEZONE
+      - PUID=$USER_ID
+      - PGID=$GROUP_ID
     volumes:
-      - ./configs/recyclarr:/config
+      - ./configs/decluttarr/config.yaml:/app/config/config.yaml
+      - ./configs/decluttarr/logs:/app/logs
+      - $DATA_DIRECTORY/media:/data/media
+    networks:
+      - default_network
+
+  profilarr:
+    image: santiagosayshey/profilarr:latest
+    container_name: profilarr
+    ports:
+      - 6868:6868
+    volumes:
+      - ./configs/profilarr:/config
     environment:
       - TZ=$TIMEZONE
     networks:
