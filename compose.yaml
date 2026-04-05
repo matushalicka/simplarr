@@ -82,7 +82,7 @@ services:
     environment:
       - TZ=$TIMEZONE
     volumes:
-      - flaresolverr:/config
+      - flaresolverr-config:/config
     networks:
       - default_network
     ports:
@@ -104,7 +104,7 @@ services:
     networks:
       - default_network
     ports:
-      - $SABNZBD_PORT:$SABNZBD_PORT
+      - 8080:8080
     restart: always
 
   qbittorrent:
@@ -115,7 +115,7 @@ services:
       - PGID=$GROUP_ID
       - UMASK=002
       - TZ=$TIMEZONE
-      - WEBUI_PORT=8082
+      - WEBUI_PORT=8081
       - TORRENTING_PORT=$QBITTORRENT_INCOMING_CONNECTIONS_PORT
     volumes:
       - ./configs/qbittorrent:/config
@@ -124,7 +124,7 @@ services:
     networks:
       - default_network
     ports:
-      - 8082:8082
+      - 8081:8081
       - $QBITTORRENT_INCOMING_CONNECTIONS_PORT:$QBITTORRENT_INCOMING_CONNECTIONS_PORT
       - $QBITTORRENT_INCOMING_CONNECTIONS_PORT:$QBITTORRENT_INCOMING_CONNECTIONS_PORT/udp
     restart: always
@@ -157,22 +157,22 @@ services:
     volumes:
       - ./configs/decluttarr/config.yaml:/app/config/config.yaml
       - ./configs/decluttarr/logs:/app/logs
-      - $DATA_DIRECTORY/media:/data/media
+      - $DATA_DIRECTORY:/data
+      - ./data2:/data2
     networks:
       - default_network
 
-  profilarr:
-    image: santiagosayshey/profilarr:latest
-    container_name: profilarr
-    ports:
-      - 6868:6868
-    volumes:
-      - ./configs/profilarr:/config
+  recyclarr:
+    image: ghcr.io/recyclarr/recyclarr:8
+    container_name: recyclarr
+    user: $USER_ID:$GROUP_ID
+    restart: always
     environment:
       - TZ=$TIMEZONE
+    volumes:
+      - ./configs/recyclarr:/config
     networks:
       - default_network
-    restart: always
 
 networks:
   default_network:
@@ -180,4 +180,4 @@ networks:
     external: true
 
 volumes:
-  flaresolverr:
+  flaresolverr-config:
