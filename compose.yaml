@@ -13,7 +13,7 @@ services:
       - ./configs/jellyfin:/config
       - $DATA_DIRECTORY/media:/data/media
     networks:
-      - default_network
+      - default-network
     ports:
       - 8096:8096
       - 8920:8920
@@ -37,7 +37,7 @@ services:
       - $DATA_DIRECTORY:/data
       - ./data2:/data2
     networks:
-      - default_network
+      - default-network
     ports:
       - 7878:7878
     restart: always
@@ -55,7 +55,7 @@ services:
       - $DATA_DIRECTORY:/data
       - ./data2:/data2
     networks:
-      - default_network
+      - default-network
     ports:
       - 8989:8989
     restart: always
@@ -71,22 +71,9 @@ services:
     volumes:
       - ./configs/prowlarr:/config
     networks:
-      - default_network
+      - default-network
     ports:
       - 9696:9696
-    restart: always
-
-  flaresolverr:
-    image: ghcr.io/flaresolverr/flaresolverr:latest
-    container_name: flaresolverr
-    environment:
-      - TZ=$TIMEZONE
-    volumes:
-      - flaresolverr-config:/config
-    networks:
-      - default_network
-    ports:
-      - 8191:8191
     restart: always
 
   sabnzbd:
@@ -102,7 +89,7 @@ services:
       - $DATA_DIRECTORY/usenet:/data/usenet
       - ./data2/usenet:/data2/usenet
     networks:
-      - default_network
+      - default-network
     ports:
       - 8080:8080
     restart: always
@@ -122,7 +109,7 @@ services:
       - $DATA_DIRECTORY/torrents:/data/torrents
       - ./data2/torrents:/data2/torrents
     networks:
-      - default_network
+      - default-network
     ports:
       - 8081:8081
       - $QBITTORRENT_INCOMING_CONNECTIONS_PORT:$QBITTORRENT_INCOMING_CONNECTIONS_PORT
@@ -141,9 +128,34 @@ services:
       - ./configs/bazarr:/config
       - $DATA_DIRECTORY/media:/data/media
     networks:
-      - default_network
+      - default-network
     ports:
       - 6767:6767
+    restart: always
+
+  recyclarr:
+    image: ghcr.io/recyclarr/recyclarr:8
+    container_name: recyclarr
+    user: $USER_ID:$GROUP_ID
+    restart: always
+    environment:
+      - TZ=$TIMEZONE
+    volumes:
+      - ./configs/recyclarr:/config
+    networks:
+      - default-network
+
+  flaresolverr:
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    container_name: flaresolverr
+    environment:
+      - TZ=$TIMEZONE
+    volumes:
+      - ./configs/flaresolverr:/config
+    networks:
+      - default-network
+    ports:
+      - 8191:8191
     restart: always
 
   decluttarr:
@@ -156,28 +168,13 @@ services:
       - PGID=$GROUP_ID
     volumes:
       - ./configs/decluttarr/config.yaml:/app/config/config.yaml
-      - ./configs/decluttarr/logs:/app/logs
+      - ./logs/decluttarr:/app/logs
       - $DATA_DIRECTORY:/data
       - ./data2:/data2
     networks:
-      - default_network
-
-  recyclarr:
-    image: ghcr.io/recyclarr/recyclarr:8
-    container_name: recyclarr
-    user: $USER_ID:$GROUP_ID
-    restart: always
-    environment:
-      - TZ=$TIMEZONE
-    volumes:
-      - ./configs/recyclarr:/config
-    networks:
-      - default_network
+      - default-network
 
 networks:
-  default_network:
+  default-network:
     name: default_network
     external: true
-
-volumes:
-  flaresolverr-config:
