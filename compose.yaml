@@ -17,8 +17,8 @@ services:
     ports:
       - 8096:8096
       - 8920:8920
-      - 7359:7359/udp
-      - 1900:1900/udp
+      # - 7359:7359/udp
+      # - 1900:1900/udp
     devices:
       - /dev/dri:/dev/dri
       - /dev/kfd:/dev/kfd
@@ -157,22 +157,6 @@ services:
     ports:
       - 8191:8191
     restart: always
-
-  decluttarr:
-    image: ghcr.io/manimatter/decluttarr:latest
-    container_name: decluttarr
-    restart: always
-    environment:
-      - TZ=${TIMEZONE}
-      - PUID=${USER_ID}
-      - PGID=${GROUP_ID}
-    volumes:
-      - ./configs/decluttarr/config.yaml:/app/config/config.yaml
-      - ./logs/decluttarr:/app/logs
-      - ${DATA_DIRECTORY}:/data
-      - ./data2:/data2
-    networks:
-      - default-network
 
 networks:
   default-network:

@@ -2,8 +2,7 @@
 source .env
 
 # Make directories
-sudo mkdir -pv ./configs/{bazarr,decluttarr,jellyfin,prowlarr,qbittorrent,radarr,recyclarr,sabnzbd,sonarr}
-sudo mkdir -pv ./logs/decluttarr
+sudo mkdir -pv ./configs/{bazarr,jellyfin,prowlarr,qbittorrent,radarr,recyclarr,sabnzbd,sonarr}
 sudo mkdir -pv "$DATA_DIRECTORY"/{media,torrents,usenet}/{movies,tv}
 sudo mkdir -pv "$DATA_DIRECTORY"/{torrents,usenet}/{incomplete,others}
 sudo mkdir -pv ./data2/{torrents,usenet}/{incomplete,movies,others,tv}
@@ -11,12 +10,10 @@ sudo mkdir -pv ./data2/{torrents,usenet}/{incomplete,movies,others,tv}
 # Set permissions
 sudo chmod 775 ./configs
 sudo chown $USER_ID:$GROUP_ID ./configs
-sudo chmod 775 ./configs/{bazarr,decluttarr,jellyfin,prowlarr,qbittorrent,radarr,recyclarr,sabnzbd,sonarr}
-sudo chown $USER_ID:$GROUP_ID ./configs/{bazarr,decluttarr,jellyfin,prowlarr,qbittorrent,radarr,recyclarr,sabnzbd,sonarr}
+sudo chmod 775 ./configs/{bazarr,jellyfin,prowlarr,qbittorrent,radarr,recyclarr,sabnzbd,sonarr}
+sudo chown $USER_ID:$GROUP_ID ./configs/{bazarr,jellyfin,prowlarr,qbittorrent,radarr,recyclarr,sabnzbd,sonarr}
 sudo chmod 775 ./logs
 sudo chown $USER_ID:$GROUP_ID ./logs
-sudo chmod 775 ./logs/decluttarr
-sudo chown $USER_ID:$GROUP_ID ./logs/decluttarr
 
 sudo find "$DATA_DIRECTORY" -type d -exec sudo chmod 775 {} \;
 sudo find "$DATA_DIRECTORY" -type f -exec sudo chmod 664 {} \;
