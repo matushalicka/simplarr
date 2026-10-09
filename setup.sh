@@ -12,8 +12,6 @@ sudo chmod 775 ./configs
 sudo chown $USER_ID:$GROUP_ID ./configs
 sudo chmod 775 ./configs/{bazarr,jellyfin,prowlarr,qbittorrent,radarr,recyclarr,sabnzbd,sonarr}
 sudo chown $USER_ID:$GROUP_ID ./configs/{bazarr,jellyfin,prowlarr,qbittorrent,radarr,recyclarr,sabnzbd,sonarr}
-sudo chmod 775 ./logs
-sudo chown $USER_ID:$GROUP_ID ./logs
 
 sudo find "$DATA_DIRECTORY" -type d -exec sudo chmod 775 {} \;
 sudo find "$DATA_DIRECTORY" -type f -exec sudo chmod 664 {} \;
