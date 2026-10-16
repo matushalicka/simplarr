@@ -17,8 +17,8 @@ services:
     ports:
       - 8096:8096
       - 8920:8920
-      # - 7359:7359/udp
-      # - 1900:1900/udp
+      - 7359:7359/udp
+      - 1900:1900/udp
     devices:
       - /dev/dri:/dev/dri
       - /dev/kfd:/dev/kfd
@@ -114,6 +114,7 @@ services:
       - 8081:8081
       - ${QBITTORRENT_INCOMING_CONNECTIONS_PORT}:${QBITTORRENT_INCOMING_CONNECTIONS_PORT}
       - ${QBITTORRENT_INCOMING_CONNECTIONS_PORT}:${QBITTORRENT_INCOMING_CONNECTIONS_PORT}/udp
+    stop_grace_period: "10s"
     restart: always
 
   bazarr:
@@ -148,8 +149,11 @@ services:
   flaresolverr:
     image: ghcr.io/flaresolverr/flaresolverr:latest
     container_name: flaresolverr
+    user: ${USER_ID}:${GROUP_ID}
     environment:
+      - LOG_FILE=/config/flaresolverr.log
       - TZ=${TIMEZONE}
+      - LANG=${LANGUAGE}
     volumes:
       - ./configs/flaresolverr:/config
     networks:
